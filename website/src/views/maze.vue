@@ -2,11 +2,11 @@
   <div>
     <div>
       <br/><br/>
-      <input type="file" accept="image/*" @change="onFile">
+      <!--<input type="file" accept="image/*" @change="onFile">
       模式：
       <label><input type="radio" name="mode" value="1" v-model="mode" /> 严格 </label>
       <label><input type="radio" name="mode" value="2" v-model="mode" /> 模糊 </label>
-      <br/>
+      <br/>-->
       
       动画速度：<input type="number" v-model.number="skipCount">
       <span v-show="clickPoints.length < 2">请点击图片的任意两处开始寻路 </span>
