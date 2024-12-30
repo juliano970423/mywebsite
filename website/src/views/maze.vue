@@ -18,7 +18,7 @@
       width: <input type="number" v-model.number="widthInput"> height: <input type="number" v-model.number="heightInput">
       速度倍率：<input type="number" v-model.number="generatSpeed">
       方格大小：<input type="number" v-model.number="cellSize"><br/>
-      <button @click="generatMaze1">生成迷宫（破墙法）</button>
+      <button @click="generatMaze1">生成迷宫<!--（破墙法）--></button>
       <!--<button @click="generatMaze2">生成迷宫（造墙法）</button>-->
     </div>
 
