@@ -1,8 +1,8 @@
 <template>
     <div class="menu">
-        <a-menu mode="horizontal" theme="light" :selected-keys="[currentSelectedKey]">
-            <a-menu-item key="title" :style="{ padding: 0, marginRight: '38px' }" disabled>
-                <img src="https://p2.itc.cn/images01/20220126/2a388985d1e7451eb72875b2d8c4fe15.png" alt="logo" style="height: 50px; width: 60px;" />
+        <a-menu mode="horizontal" theme="light" :selected-keys="[currentSelectedKey]" >
+            <a-menu-item key="title" :style="{ padding: 0, marginRight: '38px', marginDown: 0 }" disabled>
+                <img src="https://p2.itc.cn/images01/20220126/2a388985d1e7451eb72875b2d8c4fe15.png" alt="logo" style="height: 20px; width: 60px; object-fit: 'cover';" />
             </a-menu-item>
             <a-menu-item key="/" @click="navigateTo('/')"><icon-home />首頁</a-menu-item>
             <a-menu-item key="/articles" @click="navigateTo('/articles')"><icon-book />文章</a-menu-item>
@@ -61,13 +61,13 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 60px;
+    height: 61px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    width: 100%;
+    width: 100vw;
     padding: 0px;
     background-color: var(--color-bg-2);
 }
@@ -75,6 +75,8 @@
 .menu-right {
     display: flex;
     padding: 0px;
+    background-color: var(--color-bg-2);
+    height: 60px
 }
 
 .trigger-search {

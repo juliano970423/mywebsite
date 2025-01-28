@@ -43,6 +43,7 @@ export default {
   position: relative;
   margin: 0 auto;
   margin-top: 60px;
+  width: 100vw;
 }
 @media (min-width: 801px){
   .mobile-nav {
