@@ -28,8 +28,8 @@ export default {
                     <a-carousel-item v-for="image in images">
                         <img :src="image" :style="{
     width: '100%',
-                            height: '100%',
-                        }" />
+    height: '100%',
+                        }" style="object-fit: cover;"/>
                     </a-carousel-item>
                 </a-carousel>
             </a-layout-header>

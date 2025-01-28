@@ -191,6 +191,7 @@ body {
 
 .game-container {
   text-align: center;
+  background-color: white;
 }
 
 #gameCanvas {

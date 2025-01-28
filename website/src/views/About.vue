@@ -14,34 +14,40 @@
   <br /><br />
   <hr />
   <hr /><br />
-  <div class="description" style="margin-top: 20px">
+  <div class="description" style="margin-top: 20px"align=center>
     <a-space direction="vertical" class="discription-block">
+      <a-card class="discription-card" :style="{width:'80vw'}">
       <a-space direction="horizontal">
-        <a-avatar class="avatar">
+        <a-avatar class="avatar" :size=128>
           <img alt="avatar"
             src="https://img.4gamers.com.tw/puku-clone-version/d5499338b9913b42276a718ecd19e6c73b0a55e0.png" />
         </a-avatar>
         <a-descriptions class = "info" :data="data" :size="size" title="Creator Information" :column="1"
           layout="inline-vertical" />
       </a-space>
+    </a-card>
       <br /><br />
+      <a-card class="discription-card">
       <a-space direction="horizontal" size="mini" class="discription-block">
-        <a-avatar class="avatar">
+        <a-avatar class="avatar" :size=128>
           <img alt="avatar"
             src="https://truth.bahamut.com.tw/s01/202407/forum/74934/7ef2b98d84d2d428b35b0e0726642695.JPG" />
         </a-avatar>
         <a-descriptions :data="data_1" :size="size" title="Creator Information" :column="1"
           layout="inline-vertical" />
       </a-space>
+    </a-card>
       <br /><br />
+      <a-card class="discription-card">
       <a-space direction="horizontal" class="discription-block">
-        <a-avatar class="avatar">
+        <a-avatar class="avatar" :size=128>
           <img alt="avatar"
             src="https://upload-os-bbs.hoyolab.com/upload/2024/02/20/248396271/f6a88399cf0a0da5ab1c365757b88f9a_5922478165928583116.png?x-oss-process=image%2Fresize%2Cs_1000%2Fauto-orient%2C0%2Finterlace%2C1%2Fformat%2Cwebp%2Fquality%2Cq_70" />
         </a-avatar>
         <a-descriptions class = "info" :data="data_2" :size="size" title="Creator Information" :column="1"
           layout="inline-vertical" />
       </a-space>
+      </a-card>
     </a-space>
   </div>
 </template>
@@ -57,7 +63,7 @@
   margin-left: 20px;
 }
 .avatar{
-  margin-right: 10px;
+  margin-right: 100px;
 }
 </style>
 <script>
