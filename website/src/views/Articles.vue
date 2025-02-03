@@ -74,9 +74,8 @@ const paginationProps = reactive({
 const fetchUserData = async (dataSource) => {
   try {
     const postData = {};
-    const response = await axios.post('http://localhost:8080/api/getArticles', postData);
+    const response = await axios.post('/api/getArticles', postData);
 
-    //const response = await axios.post('/api/getArticles', postData);
     dataSource.value = response.data;
     console.log(response.data);
     // 更新 paginationProps 的 total 属性
@@ -126,6 +125,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 .list {
@@ -188,7 +188,6 @@ export default {
   }
 
   .articles-container {
-    margin: 0;
     padding: 0;
   }
 

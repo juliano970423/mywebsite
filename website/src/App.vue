@@ -29,9 +29,14 @@ export default {
 <style scoped>
  .layout {
   width: 100%;
-  max-width: 1280px;
   overflow-x: hidden;
   padding: 0px;
+  position-anchor: left top;
+  position: absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
 }
 
 .header {
