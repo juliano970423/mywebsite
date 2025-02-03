@@ -1,13 +1,13 @@
 <template>
     <div class="menu">
-        <a-menu mode="horizontal" theme="light" :selected-keys="[currentSelectedKey]" >
-            <a-menu-item key="title" :style="{ padding: 0, marginRight: '38px', marginDown: 0 }" disabled>
-                <img src="https://p2.itc.cn/images01/20220126/2a388985d1e7451eb72875b2d8c4fe15.png" alt="logo" style="height: 20px; width: 60px; object-fit: 'cover';" />
+        <a-menu mode="horizontal" theme="light" :selected-keys="[currentSelectedKey]" style="background-color:rgba(255, 255, 255, 0)" >
+            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="title" :style="{ padding: 0, marginRight: '38px', marginDown: 0 }" disabled>
+                <img src="https://p2.itc.cn/images01/20220126/2a388985d1e7451eb72875b2d8c4fe15.png" alt="logo" style="height: 100%; width: 60px; object-fit: 'cover';" />
             </a-menu-item>
-            <a-menu-item key="/" @click="navigateTo('/')"><icon-home />首頁</a-menu-item>
-            <a-menu-item key="/articles" @click="navigateTo('/articles')"><icon-book />文章</a-menu-item>
-            <a-menu-item key="/about" @click="navigateTo('/about')"><icon-info />關於</a-menu-item>
-            <a-sub-menu key="/0">
+            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="/" @click="navigateTo('/')"><icon-home />首頁</a-menu-item>
+            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="/articles" @click="navigateTo('/articles')"><icon-book />文章</a-menu-item>
+            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="/about" @click="navigateTo('/about')"><icon-info />關於</a-menu-item>
+            <a-sub-menu  style="background-color:rgba(255, 255, 255, 0);" key="/0">
                 <template #icon><icon-apps></icon-apps></template>
                 <template #title>game</template>
                 <a-menu-item key="/snake" @click="navigateTo('/snake')">snake</a-menu-item>
@@ -69,13 +69,15 @@
     z-index: 1000;
     width: 100vw;
     padding: 0px;
-    background-color: var(--color-bg-2);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(5px);
+
 }
 
 .menu-right {
     display: flex;
     padding: 0px;
-    background-color: var(--color-bg-2);
+    background-color: rgba(255, 255, 255, 0);
     height: 60px
 }
 
@@ -84,7 +86,7 @@
     width: 350px;
     background-color: var(--color-bg-popup);
     border-radius: 4px;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px 0;
 }
 
 .trigger-user {

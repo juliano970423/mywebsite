@@ -12,8 +12,8 @@
     </a-avatar>
   </a-space>
   <br /><br />
-  <hr />
-  <hr /><br />
+ <!--<hr />
+  <hr /><br />-->
   <div class="description" style="margin-top: 20px"align=center>
     <a-space direction="vertical" class="discription-block">
       <a-card class="discription-card" :style="{width:'80vw'}">
@@ -30,7 +30,7 @@
       <a-card class="discription-card">
       <a-space direction="horizontal" size="mini" class="discription-block">
         <a-avatar class="avatar" :size=128>
-          <img alt="avatar"
+          <img alt="avatar" object-fit="cover "
             src="https://truth.bahamut.com.tw/s01/202407/forum/74934/7ef2b98d84d2d428b35b0e0726642695.JPG" />
         </a-avatar>
         <a-descriptions :data="data_1" :size="size" title="Creator Information" :column="1"

@@ -2,24 +2,26 @@
 
   <div class="articles-container" width="100vw">
     <a-layout>
-      <a-layout-header
-        style="display: flex; justify-content: space-between; align-items: center; padding: 24px; height: 64px; background: #fff;">
+      <a-layout-header class="header">
         <h1 style="padding:24px;">文章列表</h1>
         <a-button type="primary" style="margin-left:24px;" href="/articles/create"><icon-pen
             style="margin-right: 5px;" /> 新增文章</a-button>
       </a-layout-header>
-      <a-layout-content>
+      <a-layout-content class="content">
         <a-row width="100vw" justify="center">
-          <a-col flex="3" class="content">
+          <a-col flex="3" class="list">
             <a-list class="list-demo-action-layout" :bordered="false" :data="dataSource"
-              :pagination-props="paginationProps">
+              :pagination-props="paginationProps" >
+              <template #header>
+                文章
+              </template>
               <template #item="{ item }">
                 <a-list-item class="list-demo-item" action-layout="vertical">
                   <template #actions>
-                    <span><icon-user /> author </span>
-                    <span><icon-heart />83</span>
-                    <span><icon-star />{{ item.index }}</span>
-                    <span><icon-message />Reply</span>
+                    <span><icon-user /> {{ item.author }} </span>
+                    <!--<span><icon-heart />83</span>-->
+                    <!--<span><icon-star />{{ item.index }}</span>-->
+                    <!--<span><icon-message />Reply</span>-->
                   </template>
                   <template #extra>
                     <div class="image-area">
@@ -28,7 +30,9 @@
                   </template>
                   <a-list-item-meta>
                     <template #title>
-                      <a-link :href="`/articles/read/${ item.id }`">{{ item.title }}</a-link>
+                      <a-link :href="`/articles/read/${item.id}`">
+                        <h2>{{ item.title }}</h2>
+                      </a-link>
                     </template>
                   </a-list-item-meta>
                 </a-list-item>
@@ -37,17 +41,18 @@
           </a-col>
           <a-col class="right-col" flex="1" padding="24px">
             <a-card title="隨機推薦文章">
-              <a-card :style="{ marginBottom: '20px' }" title="Inner Card Title">
-                <template #extra>
-                  <a-link>More</a-link>
-                </template>
-                Inner Card Content
-              </a-card>
-              <a-card title="Inner Card Title">
-                <template #extra>
-                  <a-link>More</a-link>
-                </template>
-                Inner Card Content
+              <a-card hoverable :style="{ marginBottom: '20px' }">
+                <div :style="{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }">
+                  <span :style="{ display: 'flex', alignItems: 'center', color: '#1D2129' }">
+
+                    <a-typography-text>{{ randomArticle.title }}</a-typography-text>
+                  </span>
+                  <a-link :href="`/articles/read/${randomArticle.id}`">More</a-link>
+                </div>
               </a-card>
             </a-card>
           </a-col>
@@ -57,13 +62,13 @@
   </div>
 </template>
 <script>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 
 const paginationProps = reactive({
-      defaultPageSize: 10,
-      total: 0 // 初始时设置为 0
-    });
+  defaultPageSize: 10,
+  total: 0 // 初始时设置为 0
+});
 
 // 定义一个异步函数以获取数据
 const fetchUserData = async (dataSource) => {
@@ -74,7 +79,7 @@ const fetchUserData = async (dataSource) => {
     //const response = await axios.post('/api/getArticles', postData);
     dataSource.value = response.data;
     console.log(response.data);
-  // 更新 paginationProps 的 total 属性
+    // 更新 paginationProps 的 total 属性
     paginationProps.total = response.data.length;
   } catch (error) {
     console.error('获取文章信息时出错:', error);
@@ -85,23 +90,60 @@ const fetchUserData = async (dataSource) => {
 export default {
   name: 'Articles',
   setup() {
-    const dataSource = ref([]);
-    fetchUserData(dataSource);
+    const dataSource = ref([]); // 获取随机文章的方法
+    const getRandomArticle = (source) => {
+      if (source.length === 0) return {}; // 如果没有文章，返回空对象
+      const randomIndex = Math.floor(Math.random() * source.length);
+      return source[randomIndex];
+    };
+
+    const randomArticle = computed(() => {
+      return getRandomArticle(dataSource.value);
+    });
+    //fetchUserData(dataSource);
+    onMounted(async () => {
+      await fetchUserData(dataSource);
+    });
     return {
       dataSource,
       paginationProps,
+      randomArticle
     }
-  },
+  }
 };
 </script>
 <style scoped>
-.content {
+.header {
+  margin-top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 24px;
+  padding-top: 84px;
+  height: 50vh;
+  background-image: url('/pictures/Elysia1.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.list {
+  padding: 48px;
+}
+
+.content {
+  background-image: url('/pictures/Elysia.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .right-col {
-  margin-top: 40px;
-  padding: 0 24px;
+  margin-top: 0px;
+  padding-right: 48px;
+  padding-top: 48px;
 }
 
 .list-demo-action-layout .image-area {
@@ -128,9 +170,15 @@ export default {
 .articles-container {
   position: relative;
   width: 100%;
-  margin: 0px auto;
-  padding: 0 24px;
+  padding: 0px;
+  margin-top: -60px;
   overflow: hidden;
+}
+
+.list-demo-action-layout {
+  background-color: rgb(255, 255, 255);
+  border-radius: 2px;
+  padding-bottom: 24px;
 }
 
 @media (max-width: 800px) {

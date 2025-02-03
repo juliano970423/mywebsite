@@ -4,10 +4,13 @@ export default {
     setup() {
         const visited_count = 1000;
         const images = [
-        'https://th.bing.com/th/id/OIP.LXbJv757DPh9_G2sWyOu0wHaDt?w=973&h=487&rs=1&pid=ImgDetMain',
-            'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/cd7a1aaea8e1c5e3d26fe2591e561798.png~tplv-uwbnlip3yd-webp.webp',
-            'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/6480dbc69be1b5de95010289787d64f1.png~tplv-uwbnlip3yd-webp.webp',
-            'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/0265a04fddbd77a19602a15d9d55d797.png~tplv-uwbnlip3yd-webp.webp',
+            //'https://th.bing.com/th/id/OIP.LXbJv757DPh9_G2sWyOu0wHaDt?w=973&h=487&rs=1&pid=ImgDetMain',
+
+            '/pictures/Seele.png',
+            'https://picx.zhimg.com/v2-53f9a387bba7b2f673ffb242934afdc3_r.jpg',
+            //'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/cd7a1aaea8e1c5e3d26fe2591e561798.png~tplv-uwbnlip3yd-webp.webp',
+            //'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/6480dbc69be1b5de95010289787d64f1.png~tplv-uwbnlip3yd-webp.webp',
+            //'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/0265a04fddbd77a19602a15d9d55d797.png~tplv-uwbnlip3yd-webp.webp',
         ];
         return {
             images,
@@ -23,20 +26,24 @@ export default {
             <a-layout-header>
                 <a-carousel :style="{
                     width: '100%',
-                    height: '80vh',
-                }" :auto-play="true" indicator-type="dot" show-arrow="hover">
+                    height: '100vh',
+                }" style="margin-top:-60px" :auto-play="true" indicator-type="dot" show-arrow="hover">
                     <a-carousel-item v-for="image in images">
                         <img :src="image" :style="{
-    width: '100%',
-    height: '100%',
-                        }" style="object-fit: cover;"/>
+                            width: '100%',
+                            height: '100%',
+                        }" style="object-fit: cover;" />
+
                     </a-carousel-item>
+
                 </a-carousel>
-            </a-layout-header>
-            <a-layout-content style="padding: 24px">
-                <h1>歡迎來到我們的網站</h1>
-                <p></p>
+                <h1 class="title">歡迎來到我們的網站</h1>
                 
+            </a-layout-header>
+            <!--<a-layout-content style="padding: 24px">
+                <!--<h1>歡迎來到我們的網站</h1>-->
+                <p></p>
+                <!--
                 <a-card hoverable :style="{ width: '360px', marginBottom: '20px' }">
                     <div :style="{
                         display: 'flex',
@@ -48,11 +55,11 @@ export default {
                             <template #prefix>
                                 <icon-user />
                             </template>
-                            <template #suffix>人</template>
-                        </a-statistic>
-                    </div>
-                </a-card>
-            </a-layout-content>
+<template #suffix>人</template>
+</a-statistic>
+</div>
+</a-card>-->
+            <!--</a-layout-content>-->
         </a-layout>
 
     </div>
@@ -67,15 +74,25 @@ export default {
 
 .a-layout-header {
     flex: 0;
+    position: relative;
 }
-
+/*
 .a-layout-content {
     flex: 1;
     padding: 24px;
+}*/
+.title{
+    position: absolute; /* 文字使用绝对定位 */
+    bottom: 60px; /* 距离底部20px */
+    left: 20px;  /* 距离左侧20px */
+    color: white;
+    padding: 10px;
+    font-size: 30px;
+    z-index: 1;
+    text-shadow: #F0F0F0 1px 0 20px;
 }
-
 @media (max-width: 800px) {
-    .a-layout-content{
+    .a-layout-content {
         padding: 16px;
     }
 }

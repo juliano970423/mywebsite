@@ -15,6 +15,7 @@ type Article struct {
 	Author   string `json:"author"`
 	Likes    int    `json:"likes"`
 	ImageSrc string `json:"imageSrc"`
+	Info     string `json:"info"`
 }
 
 // 从文件中读取文章列表
@@ -60,7 +61,23 @@ func readMarkdownFile(filename string) (string, error) {
 	return string(data), nil
 }
 
-// 处理获取文章列表的请求
+// 从文件中读取文章詳情
+func readArticleIndoFromFile(filename string) (*Article, error) {
+	data, err := os.ReadFile(filename) // 使用 os.ReadFile 替代 ioutil.ReadFile
+	if err != nil {
+		return nil, err
+	}
+
+	var article Article
+	err = json.Unmarshal(data, &article)
+	if err != nil {
+		return nil, err
+	}
+
+	return &article, nil
+}
+
+// 处理获取文章的请求
 func getArticleContent(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -85,7 +102,12 @@ func getArticleContent(w http.ResponseWriter, r *http.Request) {
 	}
 
 	articleContent, err := readMarkdownFile("./articles/" + requestBody.Id + "/content.md") // 假设文件名为 articles/
-
+	if err != nil {
+		log.Printf("Error reading articles from file: %v", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	articleInfo, err := readArticleIndoFromFile("./articles/" + requestBody.Id + "/info.json") // 假设文件名为 articles/
 	if err != nil {
 		log.Printf("Error reading articles from file: %v", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -93,9 +115,12 @@ func getArticleContent(w http.ResponseWriter, r *http.Request) {
 	}
 	var response struct {
 		Img     string `json:"img"`
+		Author  string `json:"author"`
 		Content string `json:"content"`
 	}
 	response.Content = articleContent
+	response.Author = articleInfo.Author
+	response.Img = articleInfo.ImageSrc
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }

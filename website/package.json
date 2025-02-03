@@ -12,10 +12,12 @@
   "dependencies": {
     "@arco-design/web-vue": "^2.56.3",
     "axios": "^1.7.9",
+    "highlight.js": "^11.11.1",
     "md-editor-v3": "^5.0.2",
     "oh-my-live2d": "^0.19.3",
     "pinia": "^2.2.6",
     "showdown": "^2.1.0",
+    "showdown-highlight": "^3.1.0",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
   },
