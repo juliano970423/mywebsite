@@ -24,24 +24,34 @@ loadOml2d({
       path: "/l2d/爱莉希雅-桌宠/爱莉希雅-桌宠.model3.json",
       showHitAreaFrames: true,
       position: [0, 100],
-      scale: 0.1,
-      mobileScale: 0.05,
-      style: {
-      }
+      scale: 0.08,
+      mobileScale: 0.08,
+      mobilePosition: [0, 100],
+      mobileStageStyle: {
+        
+      },
     },
 
     {
       path: "/l2d/chicheng_5/chicheng_5.model3.json",
-      position: [0, 100],
-      scale: 0.03,
+      position: [0, 110],
+      scale: 0.02,
       mobileScale: 0.02,
+      mobilePosition: [0, 100],
+      mobileStageStyle: {
+        
+      },
     },
 
     {
       path: "/l2d/bilibili-22/index.json",
-      position: [0, 0],
-      scale: 0.3,
-      mobileScale: 0.02,
+      position: [0, 40],
+      scale: 0.2,
+      mobileScale: 0.2,
+      mobilePosition: [0, 40],
+      mobileStageStyle: {
+        
+      },
       showHitAreaFrames: true,
     }
   ],
@@ -51,7 +61,7 @@ loadOml2d({
     }
   },
   stageStyle: {
-    height:"60%",
+    height:"50%",
   }
 });
 app.use(createPinia())
