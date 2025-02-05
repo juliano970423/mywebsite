@@ -221,7 +221,7 @@ import { useRoute } from 'vue-router';
 const fetchUserData = async (dataSource, id) => {
     try {
         const postData = { id: id };
-        const response = await axios.post('/api/getArticleContent', postData);
+        const response = await axios.post('https://monitors-incl-indoor-sagem.trycloudflare.com/api/getArticleContent', postData);
 
         dataSource.value = response.data;
         console.log(response.data);

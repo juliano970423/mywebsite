@@ -1,13 +1,19 @@
 <template>
     <div class="menu">
-        <a-menu mode="horizontal" theme="light" :selected-keys="[currentSelectedKey]" style="background-color:rgba(255, 255, 255, 0)" >
-            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="title" :style="{ padding: 0, marginRight: '38px', marginDown: 0 }" disabled>
-                <img src="https://p2.itc.cn/images01/20220126/2a388985d1e7451eb72875b2d8c4fe15.png" alt="logo" style="height: 100%; width: 60px; object-fit: 'cover';" />
+        <a-menu mode="horizontal" theme="light" :selected-keys="[currentSelectedKey]"
+            style="background-color:rgba(255, 255, 255, 0)">
+            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="title"
+                :style="{ padding: 0, marginRight: '38px', marginDown: 0 }" disabled>
+                <img src="https://p2.itc.cn/images01/20220126/2a388985d1e7451eb72875b2d8c4fe15.png" alt="logo"
+                    style="height: 100%; width: 60px; object-fit: 'cover';" />
             </a-menu-item>
-            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="/" @click="navigateTo('/')"><icon-home />首頁</a-menu-item>
-            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="/articles" @click="navigateTo('/articles')"><icon-book />文章</a-menu-item>
-            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="/about" @click="navigateTo('/about')"><icon-info />關於</a-menu-item>
-            <a-sub-menu  style="background-color:rgba(255, 255, 255, 0);" key="/0">
+            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="/"
+                @click="navigateTo('/')"><icon-home />首頁</a-menu-item>
+            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="/articles"
+                @click="navigateTo('/articles')"><icon-book />文章</a-menu-item>
+            <a-menu-item style="background-color:rgba(255, 255, 255, 0);" key="/about"
+                @click="navigateTo('/about')"><icon-info />關於</a-menu-item>
+            <a-sub-menu style="background-color:rgba(255, 255, 255, 0);" key="/0">
                 <template #icon><icon-apps></icon-apps></template>
                 <template #title>game</template>
                 <a-menu-item key="/snake" @click="navigateTo('/snake')">snake</a-menu-item>
@@ -31,7 +37,13 @@
                 </a-trigger>
             </div>
             -->
+            <div class="muteButton" @click="handleMute()">
+                <icon-mute v-if="!isMuted" />
+                <icon-sound v-if="isMuted" />
+            </div>
+
             <div :style="{ padding: '20px' }">
+
                 <a-trigger trigger="click" position="top" auto-fit-position :unmount-on-close="false">
                     <IconUser />
                     <template #content>
@@ -45,8 +57,8 @@
                                 <br />
                                 <a-button type="primary" size="small" :style="{ marginTop: '10px' }" href="/login"
                                     v-if="!isLoggedIn">登入</a-button>
-                                <a-button type="primary" size="small" :style="{ marginTop: '10px' }" @click="handleLogout()"
-                                    v-else-if="isLoggedIn">登出</a-button>
+                                <a-button type="primary" size="small" :style="{ marginTop: '10px' }"
+                                    @click="handleLogout()" v-else-if="isLoggedIn">登出</a-button>
                             </div>
                         </div>
                     </template>
@@ -73,7 +85,9 @@
     backdrop-filter: blur(5px);
 
 }
-
+.muteButton {
+    padding: 20px;
+}
 .menu-right {
     display: flex;
     padding: 0px;
@@ -99,13 +113,13 @@
 </style>
 <script>
 import { useAuthStore } from '@/stores/auth.js';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 export default {
     name: 'NavBar',
     setup() {
         const authStore = useAuthStore();// 使用 computed 来定义 isLoggedIn
         const isLoggedIn = computed(() => authStore.getLoginStatus);
-
+        const isMuted = ref(true);
         // 使用 computed 来定义 getUsername
         const getUsername = computed(() => {
             const username = authStore.currentUser;
@@ -119,6 +133,7 @@ export default {
             isLoggedIn,
             getUsername,
             handleLogout,
+            isMuted,
         }
     },
     computed: {
@@ -130,6 +145,11 @@ export default {
         navigateTo(path) {
             this.$router.push(path); // 使用 Vue Router 的 push 方法实现导航
         },
+
+        handleMute() {
+            this.$emit('mute', this.isMuted);
+            this.isMuted = !this.isMuted;
+        }
     },
 };
 </script>

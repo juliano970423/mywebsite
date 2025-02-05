@@ -44,6 +44,10 @@
                     </template>
                 </a-trigger>
             </div>-->
+            <div class="muteButton" @click="handleMute()">
+                <icon-mute v-if="!isMuted" />
+                <icon-sound v-if="isMuted" />
+            </div>
             <div :style="{ padding: '20px 0px' }">
                 <a-trigger trigger="click" position="top" auto-fit-position :unmount-on-close="false">
                     <IconUser />
@@ -70,8 +74,8 @@
     </div>
 </template>
 <style>
- .arco-menu-vertical .arco-menu-inline-header.arco-menu-has-icon {
-    background-color: rgba(255,255,255,0);
+.arco-menu-vertical .arco-menu-inline-header.arco-menu-has-icon {
+    background-color: rgba(255, 255, 255, 0);
 }
 </style>
 
@@ -102,12 +106,16 @@
 .menu-left {
     width: 100vw;
     backdrop-filter: blur(5px);
-    background:linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 7));
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 7));
 }
 
 .menu-right {
     display: flex;
     padding: 0px;
+}
+
+.muteButton {
+    padding: 20px 0;
 }
 
 .trigger-search {
@@ -128,14 +136,14 @@
 </style>
 <script>
 import { useAuthStore } from '@/stores/auth.js';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 export default {
     name: 'MobileNavBar',
     setup() {
         const authStore = useAuthStore();
         const isLoggedIn = computed(() => authStore.getLoginStatus);
-
+        const isMuted = ref(false);
         // 使用 computed 来定义 getUsername
         const getUsername = computed(() => {
             const username = authStore.currentUser;
@@ -147,6 +155,7 @@ export default {
             isLoggedIn,
             getUsername,
             handleLogout,
+            isMuted,
         }
     },
     computed: {
@@ -158,6 +167,10 @@ export default {
         navigateTo(path) {
             this.$router.push(path); // 使用 Vue Router 的 push 方法实现导航
         },
+        handleMute() {
+            this.$emit('mute', this.isMuted);
+            this.isMuted = !this.isMuted;
+        }
     },
 };
 </script>

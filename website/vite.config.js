@@ -13,12 +13,7 @@ export default defineConfig({
     vueDevTools(),
   ],
   server: {
-    proxy: {
-      "/api": {
-        target: "https://teen-karma-elections-bald.trycloudflare.com",
-        changeOrigin: true,
-      },
-    },
+    host: '0.0.0.0',
   },
   resolve: {
     alias: {

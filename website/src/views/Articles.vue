@@ -74,7 +74,7 @@ const paginationProps = reactive({
 const fetchUserData = async (dataSource) => {
   try {
     const postData = {};
-    const response = await axios.post('/api/getArticles', postData);
+    const response = await axios.post('https://monitors-incl-indoor-sagem.trycloudflare.com/api/getArticles', postData);
 
     dataSource.value = response.data;
     console.log(response.data);
