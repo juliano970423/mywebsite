@@ -5,7 +5,7 @@ export default {
         const visited_count = 1000;
         const images = [
             //'https://th.bing.com/th/id/OIP.LXbJv757DPh9_G2sWyOu0wHaDt?w=973&h=487&rs=1&pid=ImgDetMain',
-
+            '/pictures/IMG_2428.webp',
             '/pictures/Seele.png',
             'https://picx.zhimg.com/v2-53f9a387bba7b2f673ffb242934afdc3_r.jpg',
             //'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/cd7a1aaea8e1c5e3d26fe2591e561798.png~tplv-uwbnlip3yd-webp.webp',
