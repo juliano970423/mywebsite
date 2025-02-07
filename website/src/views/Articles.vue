@@ -11,7 +11,7 @@
         <a-row width="100vw" justify="center">
           <a-col flex="3" class="list">
             <a-list class="list-demo-action-layout" :bordered="false" :data="dataSource"
-              :pagination-props="paginationProps" >
+              :pagination-props="paginationProps">
               <template #header>
                 文章
               </template>
@@ -74,7 +74,7 @@ const paginationProps = reactive({
 const fetchUserData = async (dataSource) => {
   try {
     const postData = {};
-    const response = await axios.post('https://monitors-incl-indoor-sagem.trycloudflare.com/api/getArticles', postData);
+    const response = await axios.post('https://responsibility-authorized-thehun-gauge.trycloudflare.com/api/getArticles', postData);
 
     dataSource.value = response.data;
     console.log(response.data);
@@ -114,30 +114,40 @@ export default {
 <style scoped>
 .header {
   margin-top: 0px;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 24px;
   padding-top: 84px;
-  height: 50vh;
+  height: 60vh;
   background-image: url('/pictures/Elysia1.webp');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
+  background-position: center top;
+  background-attachment: scroll;
   overflow-x: hidden;
 }
 
+
 .list {
   padding: 48px;
+  z-index:1;
 }
 
-.content {
+.content::before {
+  content: ' ';
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
   background-image: url('/pictures/Elysia.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;
 }
 
 .right-col {
