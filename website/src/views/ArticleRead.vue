@@ -1,5 +1,5 @@
 <template>
-    <div class="article-read" :style="backgroundStyle">
+    <div class="article-read" :style="{ '--background-image': background }">
         <a-row width="100%" justify="center">
             <a-col flex="1" class="space"></a-col>
             <a-col flex="3" class="read-block">
@@ -191,21 +191,50 @@
     text-align: left;
     display: inline-block;
     color: black;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 48px;
     margin-top: 0px;
+    z-index: 1;
+    ::after{
+        content: ' ';
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+
+    }
 }
+
 
 .article-read {
     margin-top: -60px;
+
+    ::before {
+        content: ' ';
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: var(--background-image);
+    }
 }
+
 
 @media (max-width: 801px) {
     .space {
         display: none;
     }
-    .read-block{
-        width:100%;
+
+    .read-block {
+        width: 100%;
     }
 }
 </style>
@@ -221,7 +250,7 @@ import { useRoute } from 'vue-router';
 const fetchUserData = async (dataSource, id) => {
     try {
         const postData = { id: id };
-        const response = await axios.post('https://monitors-incl-indoor-sagem.trycloudflare.com/api/getArticleContent', postData);
+        const response = await axios.post('https://responsibility-authorized-thehun-gauge.trycloudflare.com/api/getArticleContent', postData);
 
         dataSource.value = response.data;
         console.log(response.data);
@@ -239,10 +268,9 @@ export default {
         const html = ref('');
         const img = ref('');
         const author = ref('');
-        const backgroundStyle = ref('');
-        backgroundStyle.value = 'background-size: cover;background-position: center;background-repeat: no-repeat;background-attachment: fixed;';
-        const backgrounds=['changli.jpg','Seele.png','Elysia1.webp','Elysia.png','Millicent.png','komari.jpg','Villhaze_Komari.png']
-        backgroundStyle.value += `background-image: url("/pictures/${backgrounds[Math.floor(Math.random() * backgrounds.length)]}");`;
+        const background = ref('');
+        const backgrounds = ['changli.jpg', 'Seele.png', 'Elysia1.webp', 'Elysia.png', 'Millicent.png', 'komari.jpg', 'Villhaze_Komari.png', 'GreatHerta1.webp', 'GreatHerta2.webp']
+        background.value = `url("/pictures/${backgrounds[Math.floor(Math.random() * backgrounds.length)]}")`;
         fetchUserData(dataSource, route.params.id).then(() => {
             const converter = new showdown.Converter({
                 extensions: [
@@ -271,7 +299,7 @@ export default {
             html,
             img,
             author,
-            backgroundStyle,
+            background,
         }
     },
 };

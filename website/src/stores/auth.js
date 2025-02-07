@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', {
       console.log(userCredentials);
       try {
         // 发送登录请求到后端
-        const response = await axios.post('https://monitors-incl-indoor-sagem.trycloudflare.com/api/login', userCredentials);
+        const response = await axios.post('https://responsibility-authorized-thehun-gauge.trycloudflare.com/api/login', userCredentials);
         // 假设后端返回的用户信息在 response.data.username
         this.username = username; // 设置用户信息
         this.isLoggedIn = true; // 更新登录状态
