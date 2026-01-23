@@ -39,12 +39,12 @@ export default {
                 </a-form-item>
                 <a-form-item label="上傳圖片" field="image">
                     <a-upload limit="1" draggable="1"
-                        action="/uploadf"
+                        :action="`${process.env.VUE_APP_UPLOAD_IMAGE_URL || 'http://localhost:8080'}/uploadf`"
                         accept=".jpg, .jpeg, .png"/>
                 </a-form-item>
                 <a-form-item label="上傳文章 (markdown)" field="markdown">
-                    <a-upload limit="1" draggable="1" action="https://conditions-fully-queen-assuming.trycloudflare.com/uploadmd" accept=".md"/> 
-                    
+                    <a-upload limit="1" draggable="1" :action="process.env.VUE_APP_UPLOAD_MARKDOWN_URL || 'https://conditions-fully-queen-assuming.trycloudflare.com/uploadmd'" accept=".md"/>
+
 
                 </a-form-item>
                 <a-form-item>

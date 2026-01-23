@@ -74,7 +74,8 @@ const paginationProps = reactive({
 const fetchUserData = async (dataSource) => {
   try {
     const postData = {};
-    const response = await axios.post('https://responsibility-authorized-thehun-gauge.trycloudflare.com/api/getArticles', postData);
+    const apiUrl = process.env.VUE_APP_API_BASE_URL || 'http://localhost:8080';
+    const response = await axios.post(`${apiUrl}/api/getArticles`, postData);
 
     dataSource.value = response.data;
     console.log(response.data);
